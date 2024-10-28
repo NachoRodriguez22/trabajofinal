@@ -5,9 +5,9 @@ import { isAdmin, isAuthenticate } from "../middlewares/middlewares.js"
 const router = Router()
 
 router.get(`/`, isAuthenticate, isAdmin, getUsers)
-router.get(`/:id`, isAuthenticate, isAdmin, getUserById)
+router.get(`/:user_id`, isAuthenticate, isAdmin, getUserById)
 router.post("/", createUser)
-router.put("/:id", isAuthenticate, updateUser)
-router.delete("/:id", isAuthenticate, deleteUser)
+router.put("/:user_id", isAuthenticate, updateUser)
+router.delete("/:user_id", isAuthenticate, deleteUser)
 
 export default router

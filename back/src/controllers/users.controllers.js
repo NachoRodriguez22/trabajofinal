@@ -10,9 +10,9 @@ export const getUsers = async (req, res) => {
 }
 
 export const getUserById = async (req, res) => {
-    const { id } = req.params
+    const { user_id } = req.params
     try {
-        const response = await Users.findByPk(id)
+        const response = await Users.findByPk(user_id)
         if (response) {
             return res.status(200).json(response)
         }

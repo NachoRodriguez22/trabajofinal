@@ -10,14 +10,12 @@ import CardActions from '@mui/material/CardActions';
 
 export const Product = ({ nombre, imagen, descripcion, precio }) => {
     useEffect(() => {
-        console.log()
-        console.log(imagen);
 
     }, [])
 
     return (
         <>
-            <Card sx={{ maxWidth: 300, margin: 1}}>
+            <Card sx={{ maxWidth: 300, margin: 1 }}>
                 <CardActionArea>
                     <CardMedia
                         component="img"

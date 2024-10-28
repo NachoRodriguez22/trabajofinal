@@ -10,9 +10,8 @@ export const loginUser = async (req, res) => {
             return res.status(401).json({ status: "Error", message: "Credenciales incorrectas." });
         }
 
-        // Almacena el nombre de usuario y el rol en la sesión
-        req.session.username = user.username; // Nombre de usuario
-        req.session.role = user.role; // Rol del usuario
+        req.session.username = user.username;
+        req.session.role = user.role;
 
         res.status(200).json({
             status: "Success",

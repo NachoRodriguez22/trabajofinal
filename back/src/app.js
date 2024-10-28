@@ -20,19 +20,21 @@ const app = express()
 const PORT = 3000
 
 //middlewares
+app.use(express.urlencoded({ extended: true }))
 app.use("/", express.static("public"))
 app.use(cors({
-    origin: 'http://localhost:5173', // Cambia esto por la URL de tu frontend
-    credentials: true, // Permite enviar cookies
+    origin: 'http://localhost:5173',
+    credentials: true,
 }));
 app.use(morgan("tiny"))
 app.use(express.json())
 app.use(sessions({
     secret: "123456",
     saveUninitialized: false,
-    cookie: { maxAge: 86400000, httpOnly: true },
+    cookie: { maxAge: 86400000, httpOnly: true, secure: false },
     resave: false
 }));
+app.use(express.json())
 
 
 //sincroniza los modelos con la base de datos

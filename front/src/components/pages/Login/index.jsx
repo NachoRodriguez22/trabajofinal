@@ -22,7 +22,7 @@ export const Login = ({ onSignIn }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                credentials: 'include', // Permite que el navegador envíe y reciba cookies
+                credentials: 'include',
                 body: JSON.stringify({ username, password }),
             });
 
