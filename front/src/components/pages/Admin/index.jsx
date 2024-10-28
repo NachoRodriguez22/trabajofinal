@@ -1,7 +1,8 @@
 import React from 'react'
+import FileUpload from "../../common/FileUpload"
 
-export const Admin = () => {
+export const AdminPanel = () => {
     return (
-        <div>index</div>
+        <FileUpload />
     )
 }

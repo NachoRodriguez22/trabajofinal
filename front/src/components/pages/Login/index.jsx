@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../config.js';
 
@@ -15,13 +15,14 @@ export const Login = ({ onSignIn }) => {
 
     const handleSignIn = async (e) => {
         e.preventDefault();
-        setError(null); // Reset error on each attempt
+        setError(null);
         try {
             const response = await fetch(`${config.backend_url}login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
+                credentials: 'include', // Permite que el navegador envíe y reciba cookies
                 body: JSON.stringify({ username, password }),
             });
 
@@ -32,19 +33,13 @@ export const Login = ({ onSignIn }) => {
 
             const data = await response.json();
 
-            // Verifica si `data.user` existe y tiene rol
             if (data.user && data.user.username && data.user.role) {
-                
-                // Llama a la función de callback si existe
-                if (onSignIn) {
-                    onSignIn(data);
-                }
+                if (onSignIn) onSignIn(data);
 
-                // Redirige según el rol del usuario
                 if (data.user.role === 'admin') {
-                    navigate('/admin'); // Página de administración
+                    navigate('/admin-panel');
                 } else if (data.user.role === 'customer') {
-                    navigate('/tienda'); // Página de tienda
+                    navigate('/tienda');
                 }
             } else {
                 throw new Error("Invalid response format");
@@ -53,6 +48,7 @@ export const Login = ({ onSignIn }) => {
             setError(error.message);
         }
     };
+
 
     return (
         <>
@@ -85,6 +81,9 @@ export const Login = ({ onSignIn }) => {
                     onChange={(e) => setPassword(e.target.value)}
                 />
                 {error && <Typography color="error">{error}</Typography>}
+                <Typography component="div" variant="div">
+                    No tienes un usuario? <Link href='/crear-usuario' underline='none'>Crear Usuario</Link>
+                </Typography>
                 <Button
                     type="submit"
                     fullWidth

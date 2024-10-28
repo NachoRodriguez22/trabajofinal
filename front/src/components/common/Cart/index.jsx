@@ -7,9 +7,9 @@ import {
     ListItemIcon,
     ListItemText,
 } from "@mui/material";
-import MailIcon from "@mui/icons-material/Mail";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-export const Sidebar = ({ open, setOpen }) => {
+export const Cart = ({ open, setOpen }) => {
     return (
         <Drawer
             onClose={() => setOpen(false)}
@@ -27,9 +27,9 @@ export const Sidebar = ({ open, setOpen }) => {
                 <ListItem key={"asd"} disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
-                            <MailIcon />
+                            <ShoppingCartIcon />
                         </ListItemIcon>
-                        <ListItemText primary={"Email"} />
+                        <ListItemText primary={"Carrito"} />
                     </ListItemButton>
                 </ListItem>
             </List>

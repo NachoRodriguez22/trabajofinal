@@ -11,14 +11,16 @@ import { Menu } from "@mui/icons-material";
 import { Sidebar } from "../Sidebar";
 import { Link } from "react-router-dom";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { ModalCart } from "../../common/ModalCart";
+import { Cart } from "../../common/Cart";
 
 export const Navbar = () => {
     const [open, setOpen] = useState(false);
-    const [openModal, setOpenModal] = useState(false);
-
+    const [open2, setOpen2] = useState(false);
     const handleOpen = () => {
         setOpen(true);
+    }
+    const handleOpen2 = () => {
+        setOpen2(true);
     };
 
     return (
@@ -49,8 +51,8 @@ export const Navbar = () => {
                         }}
                     >
                         <Button variant="text" color="default">
-                            <Link to={"/"} style={{ color: "white", textDecoration: "none" }}>
-                                Inicio
+                            <Link to={"/panel"} style={{ color: "white", textDecoration: "none" }}>
+                                Panel
                             </Link>
                         </Button>
                         <Button variant="text" color="default">
@@ -71,7 +73,10 @@ export const Navbar = () => {
                         </Button>
                     </Grid2>
 
-                    <IconButton sx={{ ml: "auto" }} onClick={() => setOpenModal(true)}>
+                    <IconButton sx={{ ml: "auto" }} edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        onClick={handleOpen2}>
                         <ShoppingCartIcon fontSize="large" sx={{ color: "white" }} />
                     </IconButton>
                 </Toolbar>
@@ -79,8 +84,7 @@ export const Navbar = () => {
             <div style={{ height: "64px" }} />
 
             <Sidebar open={open} setOpen={setOpen} />
-
-            <ModalCart setOpenModal={setOpenModal} openModal={openModal} />
+            <Cart open={open2} setOpen={setOpen2} />
         </>
     );
 };

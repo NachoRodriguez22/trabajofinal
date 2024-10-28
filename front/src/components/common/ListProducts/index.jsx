@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Product } from '../Product';
 import axios from "axios";
 import config from '../../../config.js'
+import { Grid2 } from '@mui/material';
 
 export const ListProducts = () => {
     const [products, setProducts] = useState([
@@ -19,8 +20,8 @@ export const ListProducts = () => {
 
     return (
         <>
-            {
-                products.map((product) => (
+            <Grid2 container sx={{ display: "flex", justifyContent: "space-evenly" }}>
+                {products.map((product) => (
                     <Product
                         key={product.product_id}
                         nombre={product.product_name}
@@ -29,7 +30,8 @@ export const ListProducts = () => {
                         imagen={product.imagen_url}
                     />
                 ))
-            }
+                }
+            </Grid2>
         </>
     )
 }
