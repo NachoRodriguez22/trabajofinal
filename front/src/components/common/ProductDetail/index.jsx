@@ -26,7 +26,7 @@ export const ProductDetail = () => {
 
     return (
         <>
-            <Card sx={{ maxWidth: 700, margin: 1 }}>
+            <Card sx={{ maxWidth: 700, maxHeight: 700, margin: 1 }}>
                 <CardActionArea>
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="div">{product.product_name}</Typography>

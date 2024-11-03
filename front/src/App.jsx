@@ -15,6 +15,10 @@ import { UsersDetail } from './components/common/UsersDetail';
 import { Product } from './components/pages/Products';
 import { CreateProduct } from './components/pages/CreateProduct';
 import { ImgUpload } from './components/common/ImgUpload';
+import { ListProductsAdmin } from './components/common/ListProductAdmin';
+import { EditProduct } from './components/common/EditProduct';
+import { UpdatedProduct } from './components/pages/UpdatedProduct';
+import { AuthProvider } from './components/utils/AuthContext';
 
 
 
@@ -22,26 +26,31 @@ import { ImgUpload } from './components/common/ImgUpload';
 function App() {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/tienda" element={<Tienda />} />
-        <Route path="/tienda/:id" element={<ProductDetail />} />
-        <Route path="/contacto" element={<Contact />} />
-        <Route path="/panel" element={<Panel />} />
-        <Route path="/logout-confirmation" element={<LogoutConfirmation />} />
+      <AuthProvider>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/tienda" element={<Tienda />} />
+          <Route path="/tienda/:id" element={<ProductDetail />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="/panel" element={<Panel />} />
+          <Route path="/logout-confirmation" element={<LogoutConfirmation />} />
 
-        <Route path="/crear-usuario" element={<CrearUsuario />} />
-        <Route path="/usuario-creado" element={<UsuarioCreado />} />
+          <Route path="/crear-usuario" element={<CrearUsuario />} />
+          <Route path="/usuario-creado" element={<UsuarioCreado />} />
 
-        <Route path="/admin-panel" element={<AdminPanel />} />
-        <Route path="/users" element={<ListUsers />} />
-        <Route path="/users/:id" element={<UsersDetail />} />
-        <Route path="/products" element={<Product />} />
-        <Route path="/mod-products" element={<ImgUpload />} />
-        <Route path="/create-product" element={<CreateProduct />} />
-        <Route path="/img-upload/:id" element={<ImgUpload />} />
-      </Routes>
+          <Route path="/admin-panel" element={<AdminPanel />} />
+          <Route path="/users" element={<ListUsers />} />
+          <Route path="/users/:id" element={<UsersDetail />} />
+          <Route path="/products" element={<Product />} />
+          <Route path="/mod-products" element={<ListProductsAdmin />} />
+          <Route path="/edit-product/:id" element={<EditProduct />} />
+          <Route path="/updated-product" element={<UpdatedProduct />} />
+
+          <Route path="/create-product" element={<CreateProduct />} />
+          <Route path="/img-upload/:id" element={<ImgUpload />} />
+        </Routes>
+      </AuthProvider>
     </>
   );
 }

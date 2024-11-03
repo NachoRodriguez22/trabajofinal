@@ -2,12 +2,8 @@ import React from "react";
 import {
     Drawer,
     List,
-    ListItem,
-    ListItemButton,
-    ListItemIcon,
-    ListItemText,
 } from "@mui/material";
-import MailIcon from "@mui/icons-material/Mail";
+import { Panel } from "../../pages/Panel";
 
 export const Sidebar = ({ open, setOpen }) => {
     return (
@@ -23,15 +19,8 @@ export const Sidebar = ({ open, setOpen }) => {
                 },
             }}
         >
-            <List sx={{ pt: 5 }}>
-                <ListItem key={"asd"} disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <MailIcon />
-                        </ListItemIcon>
-                        <ListItemText primary={"Email"} />
-                    </ListItemButton>
-                </ListItem>
+            <List sx={{ padding: 5 }}>
+                <Panel />
             </List>
         </Drawer>
     );

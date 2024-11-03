@@ -12,6 +12,24 @@ export const createCart = async (req, res) => {
         res.status(500).json({ message: "Error creando el carrito", error });
     }
 };
+// Obtener el carrito activo del usuario
+export const getActiveCart = async (req, res) => {
+    const { user_id } = req.query;
+    try {
+        const cart = await Cart.findOne({
+            where: { user_id, status: "active" },
+            include: CartItem,
+        });
+        if (cart) {
+            res.status(200).json(cart);
+        } else {
+            res.status(404).json({ message: "No hay carrito activo" });
+        }
+    } catch (error) {
+        res.status(500).json({ message: "Error obteniendo el carrito activo", error });
+    }
+};
+
 
 // Obtener el carrito activo del usuario
 export const getCartByUser = async (req, res) => {

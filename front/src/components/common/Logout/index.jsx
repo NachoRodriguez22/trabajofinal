@@ -12,13 +12,13 @@ const Logout = () => {
     };
 
     return (
-            <Button
-                variant="contained"
-                color="primary"
-                onClick={handleLogout}
-            >
-                Logout
-            </Button>
+        <Button
+            variant="contained"
+            color="primary"
+            onClick={handleLogout}
+        >
+            Logout
+        </Button>
     );
 };
 

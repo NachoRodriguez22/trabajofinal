@@ -51,8 +51,8 @@ export const Navbar = () => {
                         }}
                     >
                         <Button variant="text" color="default">
-                            <Link to={"/panel"} style={{ color: "white", textDecoration: "none" }}>
-                                Panel
+                            <Link to={"/"} style={{ color: "white", textDecoration: "none" }}>
+                                Inicio
                             </Link>
                         </Button>
                         <Button variant="text" color="default">

@@ -1,9 +1,6 @@
 // controllers/orderController.js
-import Order from "../models/order.model.js";
-import Cart from "../models/cart.model.js";
-import CartItem from "../models/cartItem.model.js";
+import Product from "../models/products.model.js"; // Importar el modelo de productos
 
-// Crear una orden desde un carrito
 export const createOrder = async (req, res) => {
     const { cart_id, user_id } = req.body;
     try {
@@ -18,6 +15,19 @@ export const createOrder = async (req, res) => {
             total_amount: cart.total_amount,
             status: "pending",
         });
+
+        // Descontar stock para cada item del carrito
+        for (const item of cart.CartItems) {
+            const product = await Product.findByPk(item.product_id);
+            if (product) {
+                if (product.stock < item.quantity) {
+                    return res.status(400).json({ message: `Stock insuficiente para el producto: ${product.product_name}` });
+                }
+                // Descontar el stock y guardar el cambio
+                product.stock -= item.quantity;
+                await product.save();
+            }
+        }
 
         // Cambiar el estado del carrito a "completed"
         await Cart.update({ status: "completed" }, { where: { cart_id } });

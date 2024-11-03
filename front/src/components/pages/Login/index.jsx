@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Box, Button, Link, TextField, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import config from '../../../config.js';
+import { useAuth } from "../../utils/AuthContext"
 
 export const Login = ({ onSignIn }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const { setUser } = useAuth(); // Accede a setUser desde el contexto
 
     useEffect(() => {
         console.log("Login component mounted");
@@ -34,6 +36,8 @@ export const Login = ({ onSignIn }) => {
             const data = await response.json();
 
             if (data.user && data.user.username && data.user.role) {
+                setUser(data.user); // Almacena el usuario en el contexto
+
                 if (onSignIn) onSignIn(data);
 
                 if (data.user.role === 'admin') {
@@ -49,7 +53,6 @@ export const Login = ({ onSignIn }) => {
         }
     };
 
-
     return (
         <>
             <Typography component="h1" variant="h5">
@@ -59,7 +62,6 @@ export const Login = ({ onSignIn }) => {
                 <TextField
                     margin="normal"
                     required
-                    fullWidth
                     id="username"
                     label="Nombre de Usuario"
                     name="username"
@@ -71,7 +73,6 @@ export const Login = ({ onSignIn }) => {
                 <TextField
                     margin="normal"
                     required
-                    fullWidth
                     name="password"
                     label="Contraseña"
                     type="password"

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import config from '../../../config.js';
 import { Card, CardContent, Typography, Button } from '@mui/material';

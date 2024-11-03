@@ -8,7 +8,7 @@ export const LogoutConfirmation = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             navigate('/'); // Redirige al inicio después de 3 segundos
-        }, 3000);
+        }, 1000);
 
         return () => clearTimeout(timer); // Limpia el temporizador si el componente se desmonta
     }, [navigate]);

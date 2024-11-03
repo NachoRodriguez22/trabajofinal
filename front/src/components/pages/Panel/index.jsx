@@ -5,9 +5,9 @@ import BackButton from '../../common/Volver';
 
 export const Panel = () => {
     return <>
-        <Box>
+        <Box >
             <Logout />
-        </Box>
-        <BackButton />
+            <BackButton />
+        </Box >
     </>
 };
