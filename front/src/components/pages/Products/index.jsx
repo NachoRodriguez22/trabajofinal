@@ -3,7 +3,7 @@ import { Button, Grid2 } from '@mui/material'
 import { Link } from "react-router-dom";
 import BackButton from '../../common/Volver';
 
-export const AdminPanel = () => {
+export const Product = () => {
     return (
         <>
             <Grid2
@@ -16,13 +16,13 @@ export const AdminPanel = () => {
                 }}
             >
                 <Button variant='contained'>
-                    <Link to={"/users"} style={{ color: "white", textDecoration: "none" }}>
-                        Usuarios
+                    <Link to={"/create-product"} style={{ color: "white", textDecoration: "none" }}>
+                        Crear Nuevo Producto
                     </Link>
                 </Button>
                 <Button variant='contained'>
-                    <Link to={"/products"} style={{ color: "white", textDecoration: "none" }}>
-                        Productos
+                    <Link to={"/mod-products"} style={{ color: "white", textDecoration: "none" }}>
+                        Modificar Producto
                     </Link>
                 </Button>
             </Grid2 >

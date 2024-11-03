@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { Product } from '../Product';
-import axios from "axios";
-import config from '../../../config.js'
+import axios from 'axios';
+import config from '../../../config.js';
 import { Grid2 } from '@mui/material';
 
 export const ListProducts = () => {
-    const [products, setProducts] = useState([
-    ])
+    const [products, setProducts] = useState([]);
 
     useEffect(() => {
         const fetch = async () => {
-            const response = await axios.get(`${config.backend_url}products`)
-            setProducts(response.data);
-        }
+            try {
+                const response = await axios.get(`${config.backend_url}products`);
+                setProducts(response.data);
+            } catch (error) {
+                console.error('Error fetching products:', error);
+            }
+        };
 
-        fetch()
-    }, [])
-
+        fetch();
+    }, []);
 
     return (
         <>
@@ -24,14 +26,14 @@ export const ListProducts = () => {
                 {products.map((product) => (
                     <Product
                         key={product.product_id}
+                        product_id={product.product_id}
                         nombre={product.product_name}
                         descripcion={product.descripcion}
                         precio={product.price}
-                        imagen={product.imagen_url}
+                        imagen_url={`${config.backend_url}images/${product.imagen_url}`}
                     />
-                ))
-                }
+                ))}
             </Grid2>
         </>
-    )
-}
+    );
+};

@@ -38,16 +38,25 @@ export const createProduct = async (req, res) => {
         if (!brand) {
             return res.status(400).json({ message: "Marca no válida" });
         }
+
+        // Crear el producto
         const response = await Products.create({
             ...body,
             brand_id,
             category_id
         });
-        res.status(200).json({ status: "Success", message: `Producto ID: ${response.product_id} creado.` });
+
+        // Enviar la respuesta con el product_id
+        res.status(200).json({
+            status: "Success",
+            product_id: response.product_id, // Incluir product_id directamente
+            message: `Producto ID: ${response.product_id} creado.`
+        });
     } catch (error) {
         res.status(500).json({ status: "Failure", message: error.message });
     }
 };
+
 
 export const updateProduct = async (req, res) => {
     const { id } = req.params

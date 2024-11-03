@@ -1,6 +1,7 @@
 import React from "react";
 import { ListProducts } from "../../common/ListProducts";
 import { Typography } from "@mui/material";
+import BackButton from "../../common/Volver";
 
 export const Tienda = () => {
     return (
@@ -14,6 +15,7 @@ export const Tienda = () => {
                 Nuestros Productos
             </Typography>
             <ListProducts />
+            <BackButton />
         </>
     );
 };
