@@ -12,7 +12,6 @@ export const Login = ({ onSignIn }) => {
     const { setUser } = useAuth(); // Accede a setUser desde el contexto
 
     useEffect(() => {
-        console.log("Login component mounted");
     }, []);
 
     const handleSignIn = async (e) => {

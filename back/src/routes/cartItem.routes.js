@@ -5,7 +5,7 @@ import { isAuthenticate } from "../middlewares/middlewares.js"
 
 const router = express.Router();
 
-router.post("/", isAuthenticate, addItemToCart); // Agregar producto al carrito
-router.delete("/:cart_item_id/:cart_id", isAuthenticate, removeItemFromCart); // Eliminar producto del carrito
+router.post("/", addItemToCart);
+router.delete("/:cart_item_id/:cart_id", removeItemFromCart);
 
 export default router;

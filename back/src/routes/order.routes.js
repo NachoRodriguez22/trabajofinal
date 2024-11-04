@@ -5,7 +5,7 @@ import { isAuthenticate } from "../middlewares/middlewares.js"
 
 const router = express.Router();
 
-router.post("/", isAuthenticate, createOrder); // Crear orden
-router.get("/:user_id", isAuthenticate, getOrdersByUser); // Obtener órdenes por usuario
+router.post("/", createOrder); // Crear orden
+router.get("/:user_id", getOrdersByUser); // Obtener órdenes por usuario
 
 export default router;

@@ -40,7 +40,6 @@ export const ProductDetail = () => {
                 />
                 <CardActions>
                     <Button size="small" color="primary" variant="outlined">Comprar ${product.price}</Button>
-                    <Button size="small" color="primary" variant='contained'>Agregar al carrito</Button>
                 </CardActions>
             </Card>
             <BackButton />

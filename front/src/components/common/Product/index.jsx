@@ -3,69 +3,43 @@ import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardMedia, Typography, Button, CardActions } from '@mui/material';
 import axios from 'axios';
 import config from '../../../config.js';
-import { useAuth } from "../../utils/AuthContext"
+import { useAuth } from "../../utils/AuthContext"; // Importar el contexto de autenticación
 
-// Recibe el user_id como una prop adicional
-export const Product = ({ product_id, nombre, descripcion, precio, imagen_url, user_id }) => {
+export const Product = ({ product_id, nombre, descripcion, precio, imagen_url }) => {
     const navigate = useNavigate();
+    const { user } = useAuth(); // Obtener el user desde el contexto
 
     const handleBuyNow = () => {
         navigate(`/tienda/${product_id}`);
     };
 
-    const handleAddToCart = async () => {
+    const handleCart = async () => {
+        if (!user) {
+            alert("Debes estar autenticado para agregar productos al carrito.");
+            return;
+        }
+    
         try {
-            const { user } = useAuth();
-            if (!user || !user.user_id) {
-                alert("Debes iniciar sesión para agregar productos al carrito.");
-                return;
-            }
-
-            const cartResponse = await axios.get(`${config.backend_url}cart/active`, {
-                headers: { "Content-Type": "application/json" },
-                withCredentials: true,
-            });
-
-            let cart_id;
-            if (cartResponse.data && cartResponse.data.cart_id) {
-                cart_id = cartResponse.data.cart_id;
-            } else {
-                const newCartResponse = await axios.post(`${config.backend_url}cart`,
-                    { user_id: user.user_id },
-                    { headers: { "Content-Type": "application/json" }, withCredentials: true }
-                );
-                cart_id = newCartResponse.data.cart_id;
-            }
-
-            await axios.post(
+            const response = await axios.post(
                 `${config.backend_url}cartItem`,
                 {
-                    cart_id,
                     product_id,
-                    quantity: 1
+                    quantity: 1,
+                    cart_id: user.cart_id // Usar el cart_id obtenido
                 },
                 {
                     headers: { "Content-Type": "application/json" },
                     withCredentials: true,
                 }
             );
+            console.log("Producto agregado al carrito:", response.data);
             alert("Producto agregado al carrito");
         } catch (error) {
-            console.error("Error al agregar producto al carrito", error);
-            if (error.response) {
-                // La solicitud se realizó y el servidor respondió con un código de estado
-                alert("Error al agregar al carrito: " + error.response.data.message);
-            } else if (error.request) {
-                // La solicitud se realizó pero no se recibió respuesta
-                alert("Error de red al agregar al carrito. Por favor, inténtalo de nuevo.");
-            } else {
-                // Ocurrió un error al configurar la solicitud
-                alert("Error: " + error.message);
-            }
+            console.error(`Error al cargar en el carrito: ${error}`);
+            alert("Hubo un problema al agregar el producto al carrito.");
         }
-    }
-
-
+    };
+    
 
     return (
         <Card style={{ cursor: 'pointer' }} sx={{ maxWidth: 300, height: 350, margin: 1, display: 'flex', flexDirection: 'column', justifyContent: "space-between" }}>
@@ -78,7 +52,7 @@ export const Product = ({ product_id, nombre, descripcion, precio, imagen_url, u
                 <Button size="small" color="primary" variant="outlined" onClick={handleBuyNow}>
                     Comprar $ {precio}
                 </Button>
-                <Button size="small" color="primary" variant="contained" onClick={handleAddToCart}>
+                <Button size="small" color="primary" variant="contained" onClick={handleCart}>
                     Agregar al carrito
                 </Button>
             </CardActions>
